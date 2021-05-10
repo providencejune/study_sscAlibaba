@@ -1,0 +1,21 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-order-payment
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: org.gjt.mm.mysql.Driver
+    url: jdbc:mysql://localhost:3306/caster?useSSL=false&useUnicode=true&characterEncoding=utf-8
+    # &zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.guigu.springcloud
+
+
