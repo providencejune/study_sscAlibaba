@@ -6,16 +6,33 @@ spring:
     name: cloud-order-payment
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driver-class-name: org.gjt.mm.mysql.Driver
     url: jdbc:mysql://localhost:3306/caster?useSSL=false&useUnicode=true&characterEncoding=utf-8
     # &zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowMultiQueries=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
     username: root
     password: 123456
-
-
+    driver-class-name: org.gjt.mm.mysql.Driver
+    filters: stat
+    initialSize: 2
+    maxActive: 300
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxPoolPreparedStatementPerConnectionSize: 200
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.guigu.springcloud
+  # 需要配置mapper-locations才能实现接口与xml的绑定 找到xml的位置
+  # 当mapper接口和mapper接口对应的配置文件在 命名和所在路径相同（编译后所在位置相同） 可以不配置 mapperLocations  未测试
+  # @Mapper 是生成代理类  @MapperScaner  批量生成动态代理类  如果mapper.xml 不在resource下需要在pom.xml 的 build-resouces-resource 做相应的配置
+  mapper-locations:
+    # classpath*: 去web-info/lib 的任意jar包里找对应点内容      classpath:  是web-info/classes 下找对应的内容
+    - classpath:com/guigu/**/mapper/*Mapper.xml
+  #    - classpath:mapper/*Mapper.xml
+  type-aliases-package: com.guigu.**.entity
+
 
 
