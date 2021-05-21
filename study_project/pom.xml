@@ -11,6 +11,12 @@
 
     <modules>
         <module>order-payment</module>
+        <module>order-payment2</module>
+        <module>order-info</module>
+        <module>cloud-api-commons</module>
+        <module>cloud-eureka-serve7001</module>
+        <module>cloud-eureka-serve7002</module>
+        <module>cloud-eureka-serve7003</module>
     </modules>
     <!-- 统一管理jar包版本 -->
     <properties>
@@ -71,8 +77,10 @@
     </dependencyManagement>
 
     <build>
+<!-- <finalName>order-payment</finalName> -->
         <plugins>
             <plugin>
+
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>

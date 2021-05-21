@@ -5,6 +5,7 @@ import com.guigu.springcloud.resultentity.CommonResult;
 import com.guigu.springcloud.service.OrderInfoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import javax.annotation.Resource;
 public class OrderInfoController {
     @Resource
     private OrderInfoService orderInfoService;
+    @Value("${server.port}")
+    private String servePort;
 
     @PostMapping(value = "/order/create")
     public CommonResult<Integer> createOrderInfo(OrderInfoEntity entity) {
@@ -33,7 +36,7 @@ public class OrderInfoController {
     @GetMapping(value = "/order/get/{id}")
     public CommonResult<OrderInfoEntity> getOrderInfoById(@PathVariable(value = "id") Long id) {
         OrderInfoEntity rs = orderInfoService.getById(id);
-        log.info("**获取对应订单：" + rs);
-        return new CommonResult(200, "", rs);
+        log.info("服务端口:" + servePort + ";获取对应订单：" + rs);
+        return new CommonResult(200, "服务端口:" + servePort, rs);
     }
 }
